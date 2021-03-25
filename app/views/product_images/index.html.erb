@@ -2,12 +2,15 @@
 
 <h1>Products</h1>
 
+<%= form_tag delete_multiple_product_images_path, method: :delete do %>
 <table>
   <thead>
     <tr>
       <th>Product ID</th>
       <th>Title</th>
       <th>Handle</th>
+      <th>Delete</th>
+      <th>Bulk Select</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,14 +22,22 @@
         <td><%= product_image.title %></td>
         <td><%= product_image.handle %></td>
         <td><%= link_to 'Destroy', product_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= check_box_tag "product_image_ids[]", product_image.id %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+</div>
+<% if @product_images.present? %>
+  <%= submit_tag "Delete Selected", method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+</div>
+<% end %>
+
 <br>
 
-<%= link_to 'Download', product_images_path(format: "csv"), class: 'btn btn-default' %>
+<%= link_to 'Download', product_images_path(format: "csv") %>
 
 <%= link_to 'All Products', all_products_path %>
 

@@ -45,6 +45,14 @@ class ProductImagesController < ApplicationController
         format.json { head :no_content }
       end
     end
+
+    def delete_multiple
+      ProductImage.destroy(params[:product_image_ids])
+      respond_to do |format|
+        format.html { redirect_to product_images_path, notice: 'Products were successfully deleted.' }
+        format.json { head :no_content }
+      end
+    end
   
     private
       def set_product_image
