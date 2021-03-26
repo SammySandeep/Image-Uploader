@@ -1,14 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Products</h1>
-
-<table>
-  <thead>
+<%= render "layouts/nav" %>
+<div class="container text-center" style="margin-bottom:20">
+<h3><center><b> Products </b></center></h3> 
+</div>
+<div class = "container">
+<p id="notice" style="color:green;text-align:left;"><%= notice %></p>
+  <div class = "row">
+   <div class="col-sm-4">
+<%= link_to 'Download', product_images_path(format: "csv"), class: ' btn img_upld1_btn' %>
+</div>
+<div class="col-sm-4">
+</div>
+<div class="col-sm-4">
+<%= link_to 'All Products', all_products_path, class: ' btn img_upld2_btn' %>
+</div>
+</div>
+<table class="table table-responsive-sm table-striped table-bordered">
+  <thead class="imageUpldTableHead">
     <tr>
-      <th>Product ID</th>
-      <th>Title</th>
-      <th>Handle</th>
-      <th colspan="3"></th>
+      <th class="imgupldth">Product ID</th>
+      <th class="imgupldth">Title</th>
+      <th class="imgupldth">Handle</th>
+      <th class="imgupldth">Destroy</th>
     </tr>
   </thead>
 
@@ -18,17 +30,14 @@
         <td><%= product_image.product_id %></td>
         <td><%= product_image.title %></td>
         <td><%= product_image.handle %></td>
-        <td><%= link_to 'Destroy', product_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '<i class="fa fa-times" aria-hidden="true" style="font-size:20px; color:red;"></i>'.html_safe,product_image, method: :delete,data: {   confirm: 'Are you sure you want to delete?'} %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
-<%= link_to 'Download', product_images_path(format: "csv"), class: 'btn btn-default' %>
-
-<%= link_to 'All Products', all_products_path %>
 
 <%= form_tag import_product_images_path, multipart: true do %>
   <%= file_field_tag :file %>

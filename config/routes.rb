@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :product_images do
     collection { post :import }
   end
-  root 'product_images#index'
+  root to: 'home#index'
+  get 'help', to: 'home#help'
+  # root 'product_images#index'
   get '/all_products', to: 'product_images#all_products', as: 'all_products'
 end
