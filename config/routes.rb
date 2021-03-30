@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get 'help', to: 'home#help'
   # root 'product_images#index'
   get '/all_products', to: 'product_images#all_products', as: 'all_products'
+  get 'import_csv', to: 'product_images#import_csv', as: 'import_csv'
 end

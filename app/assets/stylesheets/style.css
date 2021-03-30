@@ -69,6 +69,13 @@ button:focus{
     outline: none;
 }
 
+.del-multiple{
+    background-color: #2D2B75;
+    color: white;
+    float: right;
+   
+  }
+
 .shopsettingback, .shopsettingback:hover, .shopsettingback:active{
     background: #2D2B75;
     color: white; 
@@ -208,6 +215,12 @@ table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
     padding-left: 0px;
     padding-top: 7px;
 }
+.delete-multiple{
+    margin-top: 15px;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
 }
 
 @media screen and (max-width: 550px) and (min-width: 300px){
