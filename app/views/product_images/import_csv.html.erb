@@ -1,0 +1,62 @@
+ <%= render "layouts/nav" %>
+<section>
+    <div class="container">
+      <div class="card_shadow">
+      <div class="card-body">
+       
+<%= form_tag import_product_images_path, multipart: true, :html => {:id => "fileUploadForm"} do %>
+  <%= file_field_tag :file,:id => "fileinput", :onchange => "validate_fileupload(this.value);" %>
+  <span id="fileError" style="color:DarkOrange;"></span>
+  <%= submit_tag "Import csv", class: ' btn img_upld1_btn',id: "uploadFileForm" %>
+  <%= link_to "Back",all_products_path, :class => "btn"  %>
+<% end %> 
+      </div>
+    </div>
+</section>
+<script>
+   var formHandle = document.getElementById('fileUploadForm');
+  var fileHandle = document.getElementById("fileinput");
+  var fileErrorHandle = document.getElementById('fileError');
+  var submitHandle = document.getElementById('uploadFileForm');
+
+  var validator = {
+    fileValid: false
+  }
+  function fileValidation(){
+    if (fileHandle.value === ""){
+      fileErrorHandle.innerHTML = "Can't be blank.Please select a file.";
+      validator.fileValid = false ;
+      }
+  }
+
+  function validate_fileupload(fileName)
+  {   
+      var fileErrorHandle = document.getElementById('fileError');
+      var allowed_extensions = new Array("csv");
+      var file_extension = fileName.split('.').pop().toLowerCase(); // split function will split the filename by dot(.), and pop function will pop the last element from the array which will give you the extension as well. If there will be no extension then it will return the filename.
+      for(var i = 0; i <= allowed_extensions.length; i++)
+      {
+          if(allowed_extensions[i]==file_extension)
+          {
+              fileErrorHandle.innerHTML = "";
+              return true;
+              
+               // valid file extension
+          }
+          else{
+              fileErrorHandle.innerHTML = "Please select a csv file.";
+              return false;
+          }
+      } 
+  }
+  formHandle.addEventListener('submit',function(e){
+     fileValidation();
+      if(Object.values(validator).includes(false)){
+      e.preventDefault();
+      setTimeout(function(){
+        submitHandle.disabled = true;
+      },50);
+    }
+  },true);
+
+</script>

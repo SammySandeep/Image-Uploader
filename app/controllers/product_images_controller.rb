@@ -53,6 +53,8 @@ class ProductImagesController < ApplicationController
         format.json { head :no_content }
       end
     end
+    def import_csv
+    end
   
     private
       def set_product_image
