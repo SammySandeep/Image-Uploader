@@ -34,8 +34,7 @@ before_script:
 build:
   stage: build
   script:
-   - docker pull registry.klocapps.com/kloc/kloc-bulk-image-uploader || true
-   - docker build --cache-from registry.klocapps.com/kloc/kloc-bulk-image-uploader --tag $CONTAINER_IMAGE .
+   - docker build -t $CONTAINER_IMAGE .
    - docker push $CONTAINER_IMAGE
   <<: *only-default
 
