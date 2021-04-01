@@ -1,5 +1,6 @@
 class ProductImagesController < ApplicationController
     before_action :set_product_image, only: %i[ destroy ]
+    skip_before_action :verify_authenticity_token
 
     def index
       @product_images = ProductImage.all

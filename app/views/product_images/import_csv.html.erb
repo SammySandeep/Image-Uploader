@@ -4,7 +4,7 @@
       <div class="card_shadow">
       <div class="card-body">
        
-<%= form_tag import_product_images_path, multipart: true, authenticity_token: true, :html => {:id => "fileUploadForm"} do %>
+<%= form_tag import_product_images_path, multipart: true, :html => {:id => "fileUploadForm"} do %>
   <%= file_field_tag :file,:id => "fileinput", :onchange => "validate_fileupload(this.value);" %>
   <span id="fileError" style="color:DarkOrange;"></span>
   <%= submit_tag "Import csv", class: ' btn img_upld1_btn',id: "uploadFileForm" %>
