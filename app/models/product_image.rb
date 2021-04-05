@@ -11,30 +11,34 @@ class ProductImage < ApplicationRecord
         end
         arr = items[0]
         headers = arr.keys
-        headers = headers.collect { |e| e.strip }
+        headers = headers.collect { |e| e.strip.downcase }
         if (headers.include? "product_id") && (headers.include? "image urls") 
-          status = upload_product_image(items)
+          status = upload_product_image(items,headers)
           return status
         else
           return 406
         end
     end
   
-    def self.upload_product_image items
+    def self.upload_product_image(items, headers)
       i = 0
       if items.count > 0
         while i < items.count
           j = 0
-          if items[i]["image urls"].to_s.present?
-            url = items[i]["image urls"].split(',') unless items[i]["image urls"].to_s.strip.empty?
+          product_details = items[i].map { |k, v| [k.strip.downcase, v] }.to_h
+          if product_details["image urls"].to_s.present?
+            url = product_details["image urls"].split(';') unless product_details["image urls"].to_s.strip.empty?
             if url.count > 0
              while j < url.count
-              HTTParty.post("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_SECRET']}@#{ENV['SHOPIFY_STORE_DOMAIN']}/admin/api/2021-01/products/#{items[i]["product_id"]}/images.json", 
+              response = HTTParty.post("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_SECRET']}@#{ENV['SHOPIFY_STORE_DOMAIN']}/admin/api/2021-01/products/#{product_details["product_id"]}/images.json", 
               :body => {
                 "image": {
                   "src": url[j]
                 }
               }.to_json,  :headers => { 'Content-Type' => 'application/json' }, timeout: 200)
+              if response.code == 422
+                return 422, product_details["title"]
+              end
               j = j + 1;
              end 
             end
