@@ -34,7 +34,7 @@ class ProductImage < ApplicationRecord
                 "image": {
                   "src": url[j]
                 }
-              }.to_json,  :headers => { 'Content-Type' => 'application/json' })
+              }.to_json,  :headers => { 'Content-Type' => 'application/json' }, timeout: 200)
               j = j + 1;
              end 
             end
