@@ -11,7 +11,7 @@ class ProductImagesController < ApplicationController
     end
   
     def all_products
-      all_products = HTTParty.get("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_SECRET']}@#{ENV['SHOPIFY_STORE_DOMAIN']}/admin/api/2021-01/products.json?fields=id,title,handle,status")
+      all_products = HTTParty.get("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_SECRET']}@#{ENV['SHOPIFY_STORE_DOMAIN']}/admin/api/2021-01/products.json?fields=id,title,handle,status&limit=250")
       all_products["products"].each do |product|
         if product["status"] == "active"
           ProductImage.create(
