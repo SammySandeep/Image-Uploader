@@ -26,11 +26,11 @@ class ProductImagesController < ApplicationController
     def import
       file = params[:file]
       if file.nil?
-        redirect_to product_images_path, notice: "CSV document not present."
+        redirect_to import_csv_path, notice: "CSV document not present."
       else
         status = ProductImage.import(file)
         if status == 406
-            redirect_to product_images_path, notice: "Missing 'Product IDs' or 'Image Urls' columns for the file!"
+            redirect_to import_csv_path, notice: "Missing 'Product IDs' or 'Image Urls' columns for the file!"
         else 
             redirect_to product_images_path, notice: "All Images are uploaded"
         end
