@@ -1,5 +1,6 @@
 class ProductImagesController < ApplicationController
     before_action :set_product_image, only: %i[ destroy ]
+    skip_before_action :verify_authenticity_token
 
     def index
       @product_images = ProductImage.all
@@ -30,7 +31,9 @@ class ProductImagesController < ApplicationController
       else
         status = ProductImage.import(file)
         if status == 406
-            redirect_to import_csv_path, notice: "Missing 'Product IDs' or 'Image Urls' columns for the file!"
+            redirect_to product_images_path, notice: "Missing 'Product IDs' or 'Image Urls' columns for the file!"
+        elsif status[0] == 422
+            redirect_to product_images_path, notice: "Invalid Image Url provided for product #{status[1]}"
         else 
             redirect_to product_images_path, notice: "All Images are uploaded"
         end
