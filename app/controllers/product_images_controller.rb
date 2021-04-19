@@ -37,8 +37,7 @@ class ProductImagesController < ApplicationController
         else 
             redirect_to product_images_path, notice: "All Images are uploaded"
         end
-      end
-      
+      end   
     end
 
     def destroy
@@ -55,8 +54,6 @@ class ProductImagesController < ApplicationController
         format.html { redirect_to product_images_path, notice: 'Products were successfully deleted.' }
         format.json { head :no_content }
       end
-    end
-    def import_csv
     end
   
     private
