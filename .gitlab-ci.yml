@@ -47,7 +47,7 @@ deploy_staging:
    - echo "$S_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
    - *ssh_and_known_host_modification_definition
    - ssh kloc-admin@128.199.28.20 "cd kloc-bulk-image-uploader/ && git pull"
-   - ssh kloc-admin@128.199.28.20 "sudo echo "TAG=$CI_COMMIT_SHORT_SHA"$'\n'"DB_POOL_THREADS=$S_DB_POOL_THREADS"$'\n'"BIU_DATABASE_NAME=$S_BIU_DATABASE_NAME"$'\n'"BIU_DATABASE_USERNAME=$S_BIU_DATABASE_USERNAME"$'\n'"BIU_DATABASE_PASSWORD=$S_BIU_DATABASE_PASSWORD"$'\n'"HOST=$S_HOST"$'\n'"DB_PORT=$DB_PORT"$'\n'"SHOPIFY_API_KEY=$S_SHOPIFY_API_KEY"$'\n'"SHOPIFY_API_SECRET=$S_SHOPIFY_API_SECRET"$'\n'"SHOPIFY_STORE_DOMAIN=$S_SHOPIFY_STORE_DOMAIN"> .env && sudo docker-compose config && sudo docker-compose up -d && sudo docker-compose run rails bundle exec rake db:create && sudo docker-compose run rails bundle exec rake db:migrate "
+   - ssh kloc-admin@128.199.28.20 "sudo echo "TAG=$CI_COMMIT_SHORT_SHA"$'\n'"DB_POOL_THREADS=$S_DB_POOL_THREADS"$'\n'"BIU_DATABASE_NAME=$S_BIU_DATABASE_NAME"$'\n'"BIU_DATABASE_USERNAME=$S_BIU_DATABASE_USERNAME"$'\n'"BIU_DATABASE_PASSWORD=$S_BIU_DATABASE_PASSWORD"$'\n'"HOST=$S_HOST"$'\n'"DB_PORT=$DB_PORT"$'\n'"SHOPIFY_API_KEY=$S_SHOPIFY_API_KEY"$'\n'"SHOPIFY_API_SECRET=$S_SHOPIFY_API_SECRET"$'\n'"SHOPIFY_STORE_DOMAIN=$S_SHOPIFY_STORE_DOMAIN"$'\n'"URL=$S_URL"> .env && sudo docker-compose config && sudo docker-compose up -d && sudo docker-compose run rails bundle exec rake db:create && sudo docker-compose run rails bundle exec rake db:migrate "
   environment:
     name: staging
     url: https://$DOMAIN
