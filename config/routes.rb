@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   # root 'product_images#index'
   get '/all_products', to: 'product_images#all_products', as: 'all_products'
   get 'import_csv', to: 'product_images#import_csv', as: 'import_csv'
+  post '/shopify/delete_product', to: 'shopify#delete_product'
+  post '/shopify/update_product', to: 'shopify#update_product'
 end
