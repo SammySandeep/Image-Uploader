@@ -33,7 +33,7 @@ class ProductImage < ApplicationRecord
               response = HTTParty.post("https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_API_SECRET']}@#{ENV['SHOPIFY_STORE_DOMAIN']}/admin/api/2021-01/products/#{product_details["product_id"]}/images.json", 
               :body => {
                 "image": {
-                  "src": url[j]
+                  "src": url[j].strip
                 }
               }.to_json,  :headers => { 'Content-Type' => 'application/json' }, timeout: 200)
               if response.code == 422
