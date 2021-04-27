@@ -1,18 +1,22 @@
- <%= render "layouts/nav" %>
+ <%= render "layouts/nav" %> 
+
+<%= stylesheet_link_tag "application", "style.css" ,:media => "all" %>
 <section>
     <div class="container">
-      <div class="card_shadow">
-      <div class="card-body">
-       
-<%= form_tag import_product_images_path, multipart: true, :html => {:id => "fileUploadForm"} do %>
-  <%= file_field_tag :file,:id => "fileinput", :onchange => "validate_fileupload(this.value);" %>
+     <div class="card_shadow">
+    <div class="card-body">
+       <p id="notice" style="color:red;text-align:left;"><%= notice %></p>
+    <%= form_tag import_product_images_path,:id => 'fileUploadForm', multipart: true do %>
+    <%= file_field_tag :file,:id => "fileinput", :onchange => "validate_fileupload(this.value);" %>
   <span id="fileError" style="color:DarkOrange;"></span>
   <%= submit_tag "Import csv", class: ' btn img_upld1_btn',id: "uploadFileForm" %>
   <%= link_to "Back",all_products_path, :class => "btn"  %>
 <% end %> 
       </div>
     </div>
+    </div>
 </section>
+
 <script>
    var formHandle = document.getElementById('fileUploadForm');
   var fileHandle = document.getElementById("fileinput");
@@ -55,7 +59,7 @@
       e.preventDefault();
       setTimeout(function(){
         submitHandle.disabled = true;
-      },50);
+      });
     }
   },true);
 

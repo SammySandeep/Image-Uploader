@@ -17,11 +17,6 @@
     background: none;
     text-decoration: none;
 }
-/* a:hover {
-    background: none;
-    text-decoration: none;
-    color: #fff !important;
-} */
 .list-inline>li {
     display: inline-block;
     padding-right: 5px;
@@ -73,6 +68,7 @@ button:focus{
     background-color: #2D2B75;
     color: white;
     float: right;
+    margin-top: 20px;
    
   }
 
@@ -108,6 +104,14 @@ button:focus{
     border-radius: 3px;
     text-align: center;
 }
+.import-csv-btn, .import-csv-btn:hover, .import-csv-btn:active{
+    color: #fff;
+    padding: 4px 14px;
+    background: #2e2c75;
+    margin: 3px;
+    border-color: #2e2c75;
+    border-radius: 3px;
+}
 .img_upld1_btn_disabled, .img_upld1_btn_disabled:hover, .img_upld1_btn_disabled:active{
     color: #fff;
     padding: 4px 14px;
@@ -115,7 +119,6 @@ button:focus{
     margin: 3px;
     border-color: #6a688b;
     border-radius: 3px;
-    text-align: center;
 }
 
 .img_upld2_btn, .img_upld2_btn:hover, .img_upld2_btn:active{
@@ -123,10 +126,9 @@ button:focus{
     padding: 4px 14px;
     background: #2e2c75;
     margin: 3px;
-    float: right;
     border-color: #2e2c75;
     border-radius: 3px;
-    text-align: center;
+    margin-bottom: 10px;
 }
 .img_upld2_btn_disabled, .img_upld2_btn_disabled:hover, .img_upld2_btn_disabled:active{
     color: #fff;

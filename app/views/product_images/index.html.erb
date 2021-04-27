@@ -1,5 +1,8 @@
-<%= render "layouts/nav" %>
-<style>
+ <%= render "layouts/nav" %> 
+
+<%= stylesheet_link_tag "application", "style.css" ,:media => "all" %>
+
+ <style>
 table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after,
@@ -8,67 +11,68 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before
 table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:before{
     display: none;
-}
+} 
 </style>
+
 <div class="container text-center" style="margin-bottom:20">
-<h3><center><b> Products </b></center></h3> 
+  <h3><center><b> Products </b></center></h3> 
 </div>
 <div class = "container">
-<p id="notice" style="color:green;text-align:left;"><%= notice %></p>
+  <p id="notice" style="color:green;text-align:left;"><%= notice %></p>
   <div class = "row">
-   <div class="col">
-<%= link_to 'Download', product_images_path(format: "csv"), class: ' btn img_upld1_btn' %>
-</div>
-<div class = "col">
-</div>
-<div class = "col">
-</div>
-<div class="col">
-<%= link_to 'Import CSV', import_csv_path, class: ' btn img_upld1_btn' %>
-<%= link_to 'All Products', all_products_path, class: ' btn img_upld2_btn' %>
-</div>
-</div>
-<%= form_tag delete_multiple_product_images_path, method: :delete do %>
-<table id="example" class="table table-responsive-sm table-striped table-bordered">
-  <thead class="imageUpldTableHead">
-    <tr>
-      <th class="imgupldth">Product ID</th>
-      <th class="imgupldth">Title</th>
-      <th class="imgupldth">Handle</th>
-      <th class="imgupldth">Destroy</th>
-      <th class="imgupldth">Bulk Select</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @product_images.each do |product_image| %>
+    <div class="col text-left">
+      <%= link_to 'Download', product_images_path(format: "csv"), class: ' btn img_upld1_btn' %>
+    </div>
+
+    <div class = "col text-center">
+      <%= link_to 'Import CSV', import_csv_path, class: ' btn import-csv-btn ' %>
+    </div>
+
+    <div class="col text-right">
+      <%= link_to 'All Products', all_products_path, class: ' btn img_upld2_btn' %>
+    </div>
+  </div>
+
+  <%= form_tag delete_multiple_product_images_path, method: :delete do %>
+  <table id="example" class="table table-responsive-sm table-striped table-bordered">
+    <thead class="imageUpldTableHead">
       <tr>
-        <td><%= product_image.product_id %></td>
-        <td><%= product_image.title %></td>
-        <td><%= product_image.handle %></td>
-        <td><%= link_to '<i class="fa fa-times" aria-hidden="true" style="font-size:20px; color:red;"></i>'.html_safe,product_image, method: :delete,data: {   confirm: 'Are you sure you want to delete?'} %></td>
-        <td><%= check_box_tag "product_image_ids[]", product_image.id %></td>
+        <th class="imgupldth">Product ID</th>
+        <th class="imgupldth">Title</th>
+        <th class="imgupldth">Handle</th>
+        <th class="imgupldth">Destroy</th>
+        <th class="imgupldth">Bulk Select</th>
       </tr>
+    </thead>
+
+    <tbody>
+      <% @product_images.each do |product_image| %>
+        <tr>
+          <td><%= product_image.product_id %></td>
+          <td><%= product_image.title %></td>
+          <td><%= product_image.handle %></td>
+          <td><%= link_to '<i class="fa fa-times" aria-hidden="true" style="font-size:20px; color:red;"></i>'.html_safe,product_image, method: :delete,data: {   confirm: 'Are you sure you want to delete?'} %></td>
+          <td><%= check_box_tag "product_image_ids[]", product_image.id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    <% if @product_images.present? %>
+      <%= submit_tag "Delete Selected",class: 'btn del-multiple', method: :delete, data: { confirm: 'Are you sure?' } ,:disabled => true%>
     <% end %>
-  </tbody>
-</table>
-<% if @product_images.present? %>
-  <%= submit_tag "Delete Selected",class: 'btn del-multiple', method: :delete, data: { confirm: 'Are you sure?' } ,:disabled => true%>
-<% end %>
-<% end %>
+  <% end %>
 </div>
 
- 
 <script>
-var checkboxes = $("input[type='checkbox']"),
-    submitButt = $("input[type='submit']");
-checkboxes.click(function() {
-    submitButt.attr("disabled", !checkboxes.is(":checked"));
-});
+    var checkboxes = $("input[type='checkbox']"),
+        submitButt = $("input[type='submit']");
+        checkboxes.click(function() {
+          submitButt.attr("disabled", !checkboxes.is(":checked"));
+    });
 
 
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
 </script>
-
