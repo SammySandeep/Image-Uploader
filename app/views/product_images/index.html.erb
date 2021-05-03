@@ -52,13 +52,17 @@ table.dataTable thead .sorting_desc_disabled:before{
     <% end %>
   </tbody>
 </table>
+
 <% if @product_images.present? %>
-  <%= submit_tag "Delete Selected",class: 'btn del-multiple', method: :delete, data: { confirm: 'Are you sure?' } ,:disabled => true%>
+  <%= submit_tag "Delete Selected",class: 'btn del-multiple', method: :delete, data: { confirm: 'Are you sure?' }, disabled: true %>
 <% end %>
 <% end %>
 </div>
 
- 
+<% if @product_images.present? %>
+ <%= button_tag 'Select All', id: 'check_all', class: ' btn img_upld1_btn', style: "margin-left: 170px;"  %>
+<% end %>
+
 <script>
 var checkboxes = $("input[type='checkbox']"),
     submitButt = $("input[type='submit']");
@@ -66,9 +70,15 @@ checkboxes.click(function() {
     submitButt.attr("disabled", !checkboxes.is(":checked"));
 });
 
-
 $(document).ready(function() {
     $('#example').DataTable();
 } );
+
+$('#check_all').on("click", function(){
+  var check = $('input[type="checkbox"]');
+    check.prop("checked", !check.prop("checked"));
+    submitButt.attr("disabled", !checkboxes.is(":checked")); 
+});
+
 </script>
 
