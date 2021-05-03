@@ -10,7 +10,7 @@
     <%= file_field_tag :file,:id => "fileinput", :onchange => "validate_fileupload(this.value);" %>
   <span id="fileError" style="color:DarkOrange;"></span>
   <%= submit_tag "Import csv", class: ' btn img_upld1_btn',id: "uploadFileForm" %>
-  <%= link_to "Back",all_products_path, :class => "btn"  %>
+  <%= link_to "Back",product_images_path, :class => "btn"  %>
 <% end %> 
       </div>
     </div>
