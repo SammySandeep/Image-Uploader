@@ -63,10 +63,6 @@ table.dataTable thead .sorting_desc_disabled:before{
     <% end %>
   </tbody>
 </table>
-
-<% if @product_images.present? %>
-  <%= submit_tag "Delete Selected",class: 'btn del-multiple', method: :delete, data: { confirm: 'Are you sure?' }, disabled: true %>
-<% end %>
 <% end %>
 </div>
 
