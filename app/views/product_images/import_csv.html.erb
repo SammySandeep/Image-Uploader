@@ -1,4 +1,4 @@
- <%= render "layouts/nav" %> 
+<%= render "layouts/nav" %> 
 
 <%= stylesheet_link_tag "application", "style.css" ,:media => "all" %>
 <section>
@@ -10,7 +10,7 @@
     <%= file_field_tag :file,:id => "fileinput", :onchange => "validate_fileupload(this.value);" %>
   <span id="fileError" style="color:DarkOrange;"></span>
   <%= submit_tag "Import csv", class: ' btn img_upld1_btn',id: "uploadFileForm" %>
-  <%= link_to "Back",all_products_path, :class => "btn"  %>
+  <%= link_to "Back",product_images_path, :class => "btn"  %>
 <% end %> 
       </div>
     </div>
@@ -31,6 +31,10 @@
       fileErrorHandle.innerHTML = "Can't be blank.Please select a file.";
       validator.fileValid = false ;
       }
+    else{
+      fileErrorHandle.innerHTML = " ";
+      validator.fileValid = true ;
+    }
   }
 
   function validate_fileupload(fileName)
@@ -42,14 +46,14 @@
       {
           if(allowed_extensions[i]==file_extension)
           {
-              fileErrorHandle.innerHTML = "";
-              return true;
+              fileErrorHandle.innerHTML = " ";
+              validator.fileValid = true;
               
                // valid file extension
           }
           else{
               fileErrorHandle.innerHTML = "Please select a csv file.";
-              return false;
+              validator.fileValid = false;
           }
       } 
   }
@@ -58,8 +62,8 @@
       if(Object.values(validator).includes(false)){
       e.preventDefault();
       setTimeout(function(){
-        submitHandle.disabled = true;
-      });
+        submitHandle.disabled = false;
+      },2000);
     }
   },true);
 
